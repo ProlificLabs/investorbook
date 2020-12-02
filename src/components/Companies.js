@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import { useQuery, gql } from '@apollo/client';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import search from '../assets/icons/search-icon.png';
+import InvestorsByCompanyId from './InvestorsByCompanyId';
+
 const GET_COMPANIES = gql`
   query GetCompanies {
-      company(limit: 100) {
+      company(limit: 6) {
           id
           name
       }
@@ -104,7 +106,9 @@ const Companies = () => {
                                     <Col lg={9} md={9} xs={9} style={styles.headingName}> {name}</Col>
                                 </Row>
                             </Col>
-                            <Col xs={9} style={styles.investmentsCard}>Abbott Laboratories, Advanced Micro Devices, Altice USA, American Express, AutoZone, Builders FirstSource, Caesars Entertainment, Corning, Dana, Discover Financial Services, Edison International, Expedia Group, Hertz, Global Holdings, Hilton Worldwide Holdings, Keurig Dr Pepper, Macy's, NGL Energy Partners, NetApp, News Corp., Qualcomm, Rockwell Collins, Stanley Black & Decker, WestRock</Col>
+                            <Col xs={9} style={styles.investmentsCard}>
+                            <InvestorsByCompanyId comId={id} />                    
+                                        </Col>
                         </Row>
                         <br />
                         <hr />

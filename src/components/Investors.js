@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useQuery, gql } from '@apollo/client';
 import { Container, Row, Col, Button, Box } from 'react-bootstrap';
 import search from '../assets/icons/search-icon.png';
@@ -13,28 +13,9 @@ const GET_INVESTORS = gql`
       } 
   }
 `;
-const GET_COMPANIES = gql`
-  query GetCompanies {
-      company(limit: 100) {
-          id
-          name
-      }
-  }
-`;
-
-// const GET_COMPANIES_NAMES = gql`
-// query { investment(where: { investor_id:{_eq: 1} },limit:5) {
-//   company_id
-// investor_id 
-// company{
-//   id 
-//   name
-// }
-// }}`
-
-  function Investor(){
-    const { loading, error, data } = useQuery(GET_INVESTORS);
-    const [colour, setColour] = useState("#434FBC");
+function Investor() {
+  const { loading, error, data } = useQuery(GET_INVESTORS);
+  const [colour, setColour] = useState("#434FBC");
   const styles = {
     name: {
       fontSize: '28px',
@@ -118,15 +99,15 @@ const GET_COMPANIES = gql`
         {data.investor.map(({ id, name, photo_thumbnail }) => (
           <>
             <Link to={`/InvDetails/${id}`}>
-              <Row  style={{ cursor: 'pointer' }}>
-                <Col  xs={3}>
+              <Row style={{ cursor: 'pointer' }}>
+                <Col xs={3}>
                   <Row key={id}>
                     <Col lg={3} md={3} xs={3}> <img style={styles.thumbnail} src={photo_thumbnail} /></Col>
                     <Col lg={9} md={9} xs={9} style={styles.headingName}> {name}</Col>
                   </Row>
                 </Col>
                 <Col xs={9} style={styles.investmentsCard} key={id}>
-                 <CompanyByInvestorId invId={id} />
+                  <CompanyByInvestorId invId={id} />
                 </Col>
               </Row>
             </Link>
